@@ -20,6 +20,22 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   });
 });
 
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
+if (savedTheme === 'dark') { themeIcon.classList.replace('fa-moon', 'fa-sun'); }
+
+themeToggle.addEventListener('click', () => {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  themeIcon.classList.toggle('fa-moon');
+  themeIcon.classList.toggle('fa-sun');
+});
+
 // Header shadow on scroll
 window.addEventListener('scroll', () => {
   if (window.scrollY > 50) {
